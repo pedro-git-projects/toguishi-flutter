@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:toguishi/screens/unauthenticated/register_screen.dart';
 import 'dart:convert';
 
 import 'package:toguishi/state/auth_provider.dart';
@@ -95,6 +96,31 @@ class _LoginFormState extends State<LoginForm> {
     }
   }
 
+  Widget _tapToNavigate() {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const RegisterScreen(),
+          ),
+        );
+      },
+      child: RichText(
+        text: const TextSpan(
+          children: [
+            TextSpan(
+              text: 'Não tem conta?',
+              style: TextStyle(color: Colors.blueGrey),
+            ),
+            TextSpan(
+                text: ' Cadastre-se', style: TextStyle(color: Colors.blue)),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -122,9 +148,22 @@ class _LoginFormState extends State<LoginForm> {
             },
             obscureText: true,
           ),
-          ElevatedButton(
-            onPressed: _loginUser,
-            child: const Text('Login'),
+          Column(
+            children: [
+              const SizedBox(
+                width: 16,
+                height: 16,
+              ),
+              ElevatedButton(
+                onPressed: _loginUser,
+                child: const Text('Login'),
+              ),
+              const SizedBox(
+                width: 16,
+                height: 16,
+              ),
+              _tapToNavigate(),
+            ],
           )
         ],
       ),
