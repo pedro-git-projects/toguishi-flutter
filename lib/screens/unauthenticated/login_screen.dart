@@ -3,8 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'dart:convert';
 
-import 'package:toguishi/main.dart';
-import 'package:toguishi/services/storage_service.dart';
+import 'package:toguishi/state/auth_provider.dart';
+import 'package:toguishi/state/config_provider.dart';
+import 'package:toguishi/state/storage_service.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -68,7 +69,7 @@ class _LoginFormState extends State<LoginForm> {
       final storageService =
           Provider.of<StorageService>(context, listen: false);
 
-      final authState = Provider.of<AuthState>(context, listen: false);
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
 
       final requestBody = jsonEncode({
         "email": email,
@@ -85,7 +86,7 @@ class _LoginFormState extends State<LoginForm> {
       if (response.statusCode == 200) {
         final token = jsonDecode(response.body)['access_token'];
         storageService.write('token', token);
-        authState.checkAuthentication();
+        authProvider.checkAuthentication();
         print(token);
       } else {
         final errorMessage = jsonDecode(response.body)['message'];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toguishi/main.dart';
-import 'package:toguishi/services/storage_service.dart';
+import 'package:toguishi/state/auth_provider.dart';
+import 'package:toguishi/state/storage_service.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -9,8 +9,8 @@ class HomeScreen extends StatelessWidget {
   void _handleLogout(BuildContext context) {
     final storageService = Provider.of<StorageService>(context, listen: false);
     storageService.delete('token');
-    final authState = Provider.of<AuthState>(context, listen: false);
-    authState.checkAuthentication();
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    authProvider.checkAuthentication();
   }
 
   @override
