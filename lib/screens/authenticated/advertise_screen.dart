@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:toguishi/widgets/menu.dart';
 
-class AdvertiseScreen extends StatefulWidget {
+class AdvertiseScreen extends StatelessWidget {
   const AdvertiseScreen({super.key});
 
   @override
-  State<AdvertiseScreen> createState() => _AdvertiseScreenState();
-}
-
-class _AdvertiseScreenState extends State<AdvertiseScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Anunciar'),
+        actions: const [
+          Menu(),
+        ],
+      ),
+      body: const SafeArea(child: Text("Anunciar")),
+    );
   }
 }

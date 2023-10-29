@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:toguishi/widgets/menu.dart';
 
-class SearchScreen extends StatefulWidget {
+class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
-}
-
-class _SearchScreenState extends State<SearchScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Pesquisar'),
+        actions: const [
+          Menu(),
+        ],
+      ),
+      body: const SafeArea(child: Text("Pesquisar")),
+    );
   }
 }

@@ -5,6 +5,7 @@ import 'package:toguishi/screens/unauthenticated/login_screen.dart';
 import 'package:toguishi/state/auth_provider.dart';
 import 'package:toguishi/state/config_provider.dart';
 import 'package:toguishi/state/storage_service.dart';
+import 'package:toguishi/widgets/bottom_nav.dart';
 
 void main() async {
   final configProvider = ConfigProvider();
@@ -50,6 +51,6 @@ class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authState = Provider.of<AuthProvider>(context);
-    return authState.isAuthenticated ? const HomeScreen() : const LoginScreen();
+    return authState.isAuthenticated ? const Bottomnav() : const LoginScreen();
   }
 }

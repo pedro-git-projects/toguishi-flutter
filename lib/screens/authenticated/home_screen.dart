@@ -8,16 +8,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
-        actions: [
+        title: const Text('Toguishi'),
+        actions: const [
           Menu(),
         ],
       ),
-      body: const SafeArea(
-        child: Center(
-          child: Text('Welcome to the Home Screen'),
-        ),
-      ),
+      body: const SafeArea(child: Text("Home")),
     );
   }
 }

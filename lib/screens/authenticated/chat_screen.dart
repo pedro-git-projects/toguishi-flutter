@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:toguishi/widgets/menu.dart';
 
-class ChatScreen extends StatefulWidget {
+class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
-}
-
-class _ChatScreenState extends State<ChatScreen> {
-  @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Chat'),
+        actions: const [
+          Menu(),
+        ],
+      ),
+      body: const SafeArea(child: Text("Chat")),
+    );
   }
 }
