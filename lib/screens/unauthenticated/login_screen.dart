@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'dart:convert';
 
 import 'package:toguishi/main.dart';
+import 'package:toguishi/services/storage_service.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -36,7 +36,6 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final storage = FlutterSecureStorage();
 
   void _showErrorDialog(String errorMessage) {
     showDialog(
@@ -66,6 +65,11 @@ class _LoginFormState extends State<LoginForm> {
       final config = Provider.of<ConfigProvider>(context, listen: false);
       final ip = config.ip;
 
+      final storageService =
+          Provider.of<StorageService>(context, listen: false);
+
+      final authState = Provider.of<AuthState>(context, listen: false);
+
       final requestBody = jsonEncode({
         "email": email,
         "senha": password,
@@ -80,7 +84,8 @@ class _LoginFormState extends State<LoginForm> {
 
       if (response.statusCode == 200) {
         final token = jsonDecode(response.body)['access_token'];
-        await storage.write(key: 'token', value: token);
+        storageService.write('token', token);
+        authState.checkAuthentication();
         print(token);
       } else {
         final errorMessage = jsonDecode(response.body)['message'];
