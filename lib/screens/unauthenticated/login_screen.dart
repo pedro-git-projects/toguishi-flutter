@@ -38,6 +38,26 @@ class _LoginFormState extends State<LoginForm> {
   TextEditingController passwordController = TextEditingController();
   final storage = FlutterSecureStorage();
 
+  void _showErrorDialog(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Erro'),
+          content: Text(errorMessage),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Future<void> _loginUser() async {
     if (_formKey.currentState?.validate() ?? true) {
       final email = emailController.text;
@@ -45,9 +65,6 @@ class _LoginFormState extends State<LoginForm> {
 
       final config = Provider.of<ConfigProvider>(context, listen: false);
       final ip = config.ip;
-
-      final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
-          GlobalKey<ScaffoldMessengerState>();
 
       final requestBody = jsonEncode({
         "email": email,
@@ -66,13 +83,8 @@ class _LoginFormState extends State<LoginForm> {
         await storage.write(key: 'token', value: token);
         print(token);
       } else {
-        print("TODO: FIX SNACKBAR");
-        const errorMessage = 'Falha no login';
-        scaffoldMessengerKey.currentState?.showSnackBar(
-          const SnackBar(
-            content: Text(errorMessage),
-          ),
-        );
+        final errorMessage = jsonDecode(response.body)['message'];
+        _showErrorDialog(errorMessage);
       }
     }
   }
