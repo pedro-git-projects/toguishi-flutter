@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toguishi/screens/authenticated/home_screen.dart';
 import 'package:toguishi/screens/unauthenticated/login_screen.dart';
 import 'package:toguishi/state/auth_provider.dart';
 import 'package:toguishi/state/config_provider.dart';
