@@ -4,6 +4,8 @@ import 'package:toguishi/state/auth_provider.dart';
 import 'package:toguishi/state/storage_service.dart';
 
 class Menu extends StatelessWidget {
+  const Menu({super.key});
+
   void _handleLogout(BuildContext context) {
     final storageService = Provider.of<StorageService>(context, listen: false);
     storageService.delete('token');
