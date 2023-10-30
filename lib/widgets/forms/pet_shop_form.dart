@@ -8,48 +8,14 @@ import 'package:toguishi/state/storage_service.dart';
 
 import 'package:http/http.dart' as http;
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class PetShopForm extends StatefulWidget {
+  const PetShopForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cadastro'),
-      ),
-      body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child: (RegisterForm()),
-          ),
-        ),
-      ),
-    );
-  }
+  State<PetShopForm> createState() => _PetShopFormState();
 }
 
-class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key});
-
-  @override
-  State<RegisterForm> createState() => _RegisterFormState();
-}
-
-class _RegisterFormState extends State<RegisterForm> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-
-  String _tipo = "TOSADOR";
-  bool _possuiTesoura = false;
-  bool _possuiLamina = false;
-  bool _possuiMaquina = false;
-
-  final _nomeController = TextEditingController();
-  final _cpfCnpjController = TextEditingController();
-  final _cepController = TextEditingController();
-
+class _PetShopFormState extends State<PetShopForm> {
   void _showErrorDialog(String errorMessage) {
     showDialog(
       context: context,
@@ -70,18 +36,25 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 
-  Future<void> _registerUser() async {
+  final _formKey = GlobalKey<FormState>();
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final nomeController = TextEditingController();
+  final cpfCnpjController = TextEditingController();
+  final cepController = TextEditingController();
+
+  final String _tipo = "LOJISTA";
+
+  Future<void> _registerStore() async {
     if (_formKey.currentState?.validate() ?? true) {
-      final email = _emailController.text;
-      final password = _passwordController.text;
-      final nome = _nomeController.text;
-      final cpfOuCnpj = _cpfCnpjController.text;
-      final cep = _cepController.text;
+      final email = emailController.text;
+      final password = passwordController.text;
+      final nome = nomeController.text;
+      final cpfOuCnpj = cpfCnpjController.text;
+      final cep = cepController.text;
 
       final tipo = _tipo;
-      final possuiTesoura = _possuiTesoura;
-      final possuiLamina = _possuiLamina;
-      final possuiMaquina = _possuiMaquina;
 
       final config = Provider.of<ConfigProvider>(context, listen: false);
       final ip = config.ip;
@@ -98,9 +71,6 @@ class _RegisterFormState extends State<RegisterForm> {
         "cpfOuCnpj": cpfOuCnpj,
         "cep": cep,
         "tipo": tipo,
-        "possuiTesoura": possuiTesoura,
-        "possuiLamina": possuiLamina,
-        "possuiMaquina": possuiMaquina,
       });
 
       print(requestBody);
@@ -128,29 +98,11 @@ class _RegisterFormState extends State<RegisterForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            DropdownButton<String>(
-              value: _tipo,
-              items: const <DropdownMenuItem<String>>[
-                DropdownMenuItem(
-                  value: 'TOSADOR',
-                  child: Text('Tosador'),
-                ),
-                DropdownMenuItem(
-                  value: 'LOJISTA',
-                  child: Text('Lojista'),
-                ),
-              ],
-              onChanged: (value) {
-                setState(() {
-                    _tipo = value!;
-                });
-              },
-            ),
             TextFormField(
-              controller: _emailController,
+              controller: emailController,
               decoration: const InputDecoration(
                 labelText: "Email",
               ),
@@ -162,7 +114,7 @@ class _RegisterFormState extends State<RegisterForm> {
               },
             ),
             TextFormField(
-              controller: _passwordController,
+              controller: passwordController,
               decoration: const InputDecoration(
                 labelText: "Senha",
               ),
@@ -174,7 +126,7 @@ class _RegisterFormState extends State<RegisterForm> {
               },
             ),
             TextFormField(
-              controller: _nomeController,
+              controller: nomeController,
               decoration: const InputDecoration(
                 labelText: "Nome",
               ),
@@ -186,7 +138,7 @@ class _RegisterFormState extends State<RegisterForm> {
               },
             ),
             TextFormField(
-              controller: _cpfCnpjController,
+              controller: cpfCnpjController,
               decoration: const InputDecoration(
                 labelText: "CPF ou CNPJ",
               ),
@@ -198,7 +150,7 @@ class _RegisterFormState extends State<RegisterForm> {
               },
             ),
             TextFormField(
-              controller: _cepController,
+              controller: cepController,
               decoration: const InputDecoration(
                 labelText: "CEP",
               ),
@@ -209,59 +161,11 @@ class _RegisterFormState extends State<RegisterForm> {
                 return null;
               },
             ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: _possuiTesoura,
-                  onChanged: (value) {
-                    setState(() {
-                      if (value != null) {
-                        _possuiTesoura = value;
-                      }
-                    });
-                  },
-                ),
-                const Text("Possui tesoura"),
-              ],
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: _possuiLamina,
-                  onChanged: (value) {
-                    setState(() {
-                      if (value != null) {
-                        _possuiLamina = value;
-                      }
-                    });
-                  },
-                ),
-                const Text("Possui lâmina"),
-              ],
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: _possuiMaquina,
-                  onChanged: (value) {
-                    setState(() {
-                      if (value != null) {
-                        _possuiMaquina = value;
-                      }
-                    });
-                  },
-                ),
-                const Text("Possui máquina"),
-              ],
-            ),
             ButtonBar(
               alignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: _registerUser,
+                  onPressed: _registerStore,
                   child: const Text("Cadastrar"),
                 ),
               ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toguishi/widgets/menu.dart';
+import 'package:toguishi/widgets/ui/menu.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

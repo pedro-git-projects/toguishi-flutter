@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:toguishi/screens/unauthenticated/choice_screen.dart';
 import 'package:toguishi/screens/unauthenticated/register_screen.dart';
 import 'dart:convert';
 
@@ -102,7 +103,7 @@ class _LoginFormState extends State<LoginForm> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const RegisterScreen(),
+            builder: (context) => const ChoiceScreen(),
           ),
         );
       },
@@ -125,47 +126,50 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        children: [
-          TextFormField(
-            controller: emailController,
-            decoration: const InputDecoration(labelText: 'Email'),
-            validator: (value) {
-              if (value?.isEmpty ?? true) {
-                return 'O email não pode estar vazio';
-              }
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: passwordController,
-            decoration: const InputDecoration(labelText: 'Senha'),
-            validator: (value) {
-              if (value?.isEmpty ?? true) {
-                return 'Por favor insira sua senha';
-              }
-              return null;
-            },
-            obscureText: true,
-          ),
-          Column(
-            children: [
-              const SizedBox(
-                width: 16,
-                height: 16,
-              ),
-              ElevatedButton(
-                onPressed: _loginUser,
-                child: const Text('Login'),
-              ),
-              const SizedBox(
-                width: 16,
-                height: 16,
-              ),
-              _tapToNavigate(),
-            ],
-          )
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextFormField(
+              controller: emailController,
+              decoration: const InputDecoration(labelText: 'Email'),
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return 'O email não pode estar vazio';
+                }
+                return null;
+              },
+            ),
+            TextFormField(
+              controller: passwordController,
+              decoration: const InputDecoration(labelText: 'Senha'),
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return 'Por favor insira sua senha';
+                }
+                return null;
+              },
+              obscureText: true,
+            ),
+            Column(
+              children: [
+                const SizedBox(
+                  width: 16,
+                  height: 16,
+                ),
+                ElevatedButton(
+                  onPressed: _loginUser,
+                  child: const Text('Login'),
+                ),
+                const SizedBox(
+                  width: 16,
+                  height: 16,
+                ),
+                _tapToNavigate(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

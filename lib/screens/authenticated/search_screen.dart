@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toguishi/widgets/menu.dart';
+import 'package:toguishi/widgets/ui/menu.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

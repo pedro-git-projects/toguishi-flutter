@@ -4,7 +4,7 @@ import 'package:toguishi/screens/unauthenticated/login_screen.dart';
 import 'package:toguishi/state/auth_provider.dart';
 import 'package:toguishi/state/config_provider.dart';
 import 'package:toguishi/state/storage_service.dart';
-import 'package:toguishi/widgets/bottom_nav.dart';
+import 'package:toguishi/widgets/nav/bottom_nav.dart';
 
 void main() async {
   final configProvider = ConfigProvider();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toguishi/widgets/menu.dart';
+import 'package:toguishi/widgets/ui/menu.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
