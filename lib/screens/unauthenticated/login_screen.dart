@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:toguishi/screens/unauthenticated/choice_screen.dart';
-import 'package:toguishi/screens/unauthenticated/register_screen.dart';
 import 'dart:convert';
 
 import 'package:toguishi/state/auth_provider.dart';
