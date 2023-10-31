@@ -8,7 +8,7 @@ class RegisterGroomerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Criar conta'),
+        title: const Text('Criar Conta - Tosador'),
       ),
       body: const SafeArea(
         child: Padding(

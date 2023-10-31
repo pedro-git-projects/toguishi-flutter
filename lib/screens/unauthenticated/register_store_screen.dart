@@ -8,7 +8,7 @@ class RegisterStoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Criar conta'),
+        title: const Text('Criar Conta - Lojista'),
       ),
       body: const SafeArea(
         child: Padding(
