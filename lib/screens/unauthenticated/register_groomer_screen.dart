@@ -13,7 +13,9 @@ class RegisterGroomerScreen extends StatelessWidget {
       body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16.0),
-          child: GroomerForm(),
+          child: SingleChildScrollView(
+            child: GroomerForm(),
+          ),
         ),
       ),
     );

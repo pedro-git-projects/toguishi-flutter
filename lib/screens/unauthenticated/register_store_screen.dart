@@ -13,7 +13,9 @@ class RegisterStoreScreen extends StatelessWidget {
       body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16.0),
-          child: PetShopForm(),
+          child: SingleChildScrollView(
+            child: PetShopForm(),
+          ),
         ),
       ),
     );
