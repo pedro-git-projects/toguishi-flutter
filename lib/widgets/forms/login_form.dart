@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:toguishi/screens/unauthenticated/choice_screen.dart';
+import 'package:toguishi/screens/unauthenticated/forgot_screen.dart';
 import 'dart:convert';
 
 import 'package:toguishi/state/auth_provider.dart';
@@ -19,6 +20,7 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _loginAttemptFailed = false;
 
   void _showErrorDialog(String errorMessage) {
     showDialog(
@@ -73,11 +75,14 @@ class _LoginFormState extends State<LoginForm> {
       } else {
         final errorMessage = jsonDecode(response.body)['message'];
         _showErrorDialog(errorMessage);
+        setState(() {
+          _loginAttemptFailed = true;
+        });
       }
     }
   }
 
-  Widget _tapToNavigate() {
+  Widget _tapToNavigateToChoiceScreen() {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -100,6 +105,37 @@ class _LoginFormState extends State<LoginForm> {
         ),
       ),
     );
+  }
+
+  Widget _tapToNavigateToForgotScreen() {
+    if (_loginAttemptFailed) {
+      // Display only if the login attempt failed
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ForgotScreen(),
+            ),
+          );
+        },
+        child: RichText(
+          text: const TextSpan(
+            children: [
+              TextSpan(
+                text: 'Não consegue entrar? ',
+                style: TextStyle(color: Colors.blueGrey),
+              ),
+              TextSpan(
+                  text: 'Recuperar acesso',
+                  style: TextStyle(color: Colors.red)),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return const SizedBox(); // Placeholder widget when login attempt succeeded
+    }
   }
 
   @override
@@ -145,7 +181,12 @@ class _LoginFormState extends State<LoginForm> {
                   width: 16,
                   height: 16,
                 ),
-                _tapToNavigate(),
+                _tapToNavigateToChoiceScreen(),
+                const SizedBox(
+                  width: 16,
+                  height: 16,
+                ),
+                _tapToNavigateToForgotScreen(),
               ],
             )
           ],
