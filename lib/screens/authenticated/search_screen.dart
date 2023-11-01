@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:toguishi/widgets/ui/menu.dart';
+import 'package:toguishi/widgets/ui/drawer_menu.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -7,11 +7,9 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: const DrawerMenu(),
       appBar: AppBar(
         title: const Text('Pesquisar'),
-        actions: const [
-          Menu(),
-        ],
       ),
       body: const SafeArea(child: Text("Pesquisar")),
     );
