@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:toguishi/screens/unauthenticated/choice_screen.dart';
-import 'package:toguishi/screens/unauthenticated/forgot_screen.dart';
+import 'package:toguishi/screens/unauthenticated/recovery_screen.dart';
 import 'dart:convert';
 
 import 'package:toguishi/state/auth_provider.dart';
@@ -115,7 +115,7 @@ class _LoginFormState extends State<LoginForm> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ForgotScreen(),
+              builder: (context) => const RecoveryScreen(),
             ),
           );
         },
