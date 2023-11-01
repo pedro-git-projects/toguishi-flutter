@@ -39,6 +39,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      darkTheme: ThemeData.dark(), 
+      themeMode: ThemeMode
+          .system, 
       home: const AuthWrapper(),
     );
   }
@@ -50,6 +53,6 @@ class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authState = Provider.of<AuthProvider>(context);
-    return authState.isAuthenticated ? const LoginScreen() : const Bottomnav();
+    return authState.isAuthenticated ? const Bottomnav() : const LoginScreen();
   }
 }

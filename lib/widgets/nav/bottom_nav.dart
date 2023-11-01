@@ -28,7 +28,12 @@ class _BottomnavState extends State<Bottomnav> {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context); 
+    final Color scaffoldBackgroundColor = theme.brightness == Brightness.light
+        ? theme.primaryColor
+        : theme.scaffoldBackgroundColor;
     return Scaffold(
+      backgroundColor: scaffoldBackgroundColor, 
       body: SafeArea(
         child: _screens[_selectedTabIndex],
       ),
