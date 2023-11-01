@@ -53,6 +53,6 @@ class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authState = Provider.of<AuthProvider>(context);
-    return authState.isAuthenticated ? const Bottomnav() : const LoginScreen();
+    return authState.isAuthenticated ? const LoginScreen() : const Bottomnav();
   }
 }
