@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:toguishi/screens/authenticated/advertise_screen.dart';
-import 'package:toguishi/screens/authenticated/chat_screen.dart';
-import 'package:toguishi/screens/authenticated/home_screen.dart';
-import 'package:toguishi/screens/authenticated/search_screen.dart';
+import 'package:toguishi/screens/authenticated/advertisement/advertise_screen.dart';
+import 'package:toguishi/screens/authenticated/chat/chat_screen.dart';
+import 'package:toguishi/screens/authenticated/home/home_screen.dart';
+import 'package:toguishi/screens/authenticated/search/job_search_screen.dart';
+import 'package:toguishi/screens/authenticated/search/search_screen.dart';
 
 class Bottomnav extends StatefulWidget {
   const Bottomnav({super.key});
@@ -23,17 +24,18 @@ class _BottomnavState extends State<Bottomnav> {
       const ChatScreen(),
       const AdvertiseScreen(),
       const SearchScreen(),
+      const JobSearchScreen(),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context); 
+    final ThemeData theme = Theme.of(context);
     final Color scaffoldBackgroundColor = theme.brightness == Brightness.light
         ? theme.primaryColor
         : theme.scaffoldBackgroundColor;
     return Scaffold(
-      backgroundColor: scaffoldBackgroundColor, 
+      backgroundColor: scaffoldBackgroundColor,
       body: SafeArea(
         child: _screens[_selectedTabIndex],
       ),
@@ -54,6 +56,10 @@ class _BottomnavState extends State<Bottomnav> {
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Buscar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Job',
           ),
         ],
         currentIndex: _selectedTabIndex,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:toguishi/widgets/ui/drawer_menu.dart';
+import 'package:toguishi/widgets/ui/search_box.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -11,7 +12,12 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Pesquisar'),
       ),
-      body: const SafeArea(child: Text("Pesquisar")),
+      body: const SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(16),
+          child: SearchBox(),
+        ),
+      ),
     );
   }
 }
