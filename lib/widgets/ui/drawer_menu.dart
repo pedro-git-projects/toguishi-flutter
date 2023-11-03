@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toguishi/state/auth_provider.dart';
 import 'package:toguishi/state/storage_service.dart';
+import 'package:toguishi/widgets/ui/theme_toggler.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
@@ -13,7 +14,10 @@ class DrawerMenu extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           const DrawerHeader(
-            child: Text('Menu'),
+            child: Text('Nome do Usuario'),
+          ),
+          const ListTile(
+            title: ThemeToggler(),
           ),
           ListTile(
             leading: const Icon(Icons.logout),

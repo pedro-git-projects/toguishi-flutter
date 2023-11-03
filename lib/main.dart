@@ -4,6 +4,7 @@ import 'package:toguishi/screens/unauthenticated/login_screen.dart';
 import 'package:toguishi/state/auth_provider.dart';
 import 'package:toguishi/state/config_provider.dart';
 import 'package:toguishi/state/storage_service.dart';
+import 'package:toguishi/state/theme_provider.dart';
 import 'package:toguishi/widgets/nav/bottom_nav.dart';
 
 void main() async {
@@ -15,6 +16,8 @@ void main() async {
 
   final storageService = StorageService();
 
+  final themeProvider = ThemeProvider();
+
   runApp(
     MultiProvider(
       providers: [
@@ -22,6 +25,7 @@ void main() async {
           value: configProvider,
         ),
         ChangeNotifierProvider.value(value: authProvider),
+        ChangeNotifierProvider.value(value: themeProvider),
         Provider.value(value: storageService),
       ],
       child: const MyApp(),
@@ -34,14 +38,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       title: 'Toguishi',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      darkTheme: ThemeData.dark(), 
-      themeMode: ThemeMode
-          .system, 
+      darkTheme: ThemeData.dark(),
+      themeMode: themeProvider.currentThemeMode,
       home: const AuthWrapper(),
     );
   }
